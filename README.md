@@ -1,4 +1,4 @@
-Backs up (saves) modified dates (timestamps) for all files including those in subfolders in a directory with the ability to later restore them from the saved state
+Backs up (saves) modified dates (timestamps) for all files including those in subfolders in a directory with the ability to later restore them from the saved state, might be useful for cloud backup software and services which don't support restoring file timestamps when getting your files back
 
 **Requirements:**  
 Python (2\3+ version)  
