@@ -11,7 +11,7 @@ Python 3+ (2 is fine too if you don't have unicode-named files)
 
 **Console-less usage (GUI):**
 
-Navigate to `shell:opento` (enter into explorer's address bar)  
+Navigate to `shell:sendto` (enter into explorer's address bar)  
 ![image](https://user-images.githubusercontent.com/1309656/123554015-ce337380-d786-11eb-88bc-48a8c214a88d.png)
 
 and place two `.bat` files there (or shortcuts to them, doesn't matter) after editing those with notepad to have the correct path pointing to your `backup-file-timestamps.py` file where you placed it after saving)  
