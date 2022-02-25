@@ -3,24 +3,35 @@
 # Utility script for saving and restore the modification times for all files in a tree
 
 from __future__ import print_function
-
+#from timeit import default_timer as timer
 import argparse
 import json
 import os
 import sys
 import time
 
+file_attrs = {}
 def collect_file_attrs(path):
-    dirs = os.walk(path)
-    file_attrs = {}
-    for (dirpath, dirnames, filenames) in dirs:
-        files = dirnames + filenames
-        for file in files:
-            path = os.path.join(dirpath, file)
-            file_attrs[path] = {
-                'mtime' : os.path.getmtime(path)
-            }
-    return file_attrs
+    dirs = []
+    scandir_it = os.scandir(path)
+    for entry in scandir_it:
+        file_attrs[entry.path] = {'mtime' : entry.stat().st_mtime}
+        if entry.is_dir():
+            dirs.append(entry.path)
+    for subdir in dirs:
+        collect_file_attrs(subdir)
+
+# def collect_file_attrsOSWALK(path):
+#     dirs = os.walk(path)
+#     file_attrs = {}
+#     for (dirpath, dirnames, filenames) in dirs:
+#         files = dirnames + filenames
+#         for file in files:
+#             path = os.path.join(dirpath, file)
+#             file_attrs[path] = {
+#                 'mtime' : os.path.getmtime(path)
+#             }
+#     return file_attrs
 
 def apply_file_attrs(attrs):
     for path in sorted(attrs):
@@ -77,9 +88,13 @@ def main():
         filepath = os.path.join(path, ATTR_FILE_NAME)
         print('Saving timestamps to: \'%s\'' % filepath)
         attr_file = open(filepath, 'w')
-        attrs = collect_file_attrs(path)
-        json.dump(attrs, attr_file)
+        #start = timer()
+        collect_file_attrs(path)
+        #end = timer()
+        #print(end - start) 
+        json.dump(file_attrs, attr_file)
         print('Save complete !')
     time.sleep(3)
+    #input("Press Enter to continue...")
 if __name__ == '__main__':
     main()
