@@ -1,1 +1,1 @@
-python "C:\MyScripts\backup-file-timestamps.py" -restore %1
+"%~dp0backup_file_timestamps.exe" -restore %1
