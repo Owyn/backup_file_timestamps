@@ -42,9 +42,9 @@ jobs:
       - name: Build [macOS]
         if: matrix.os == 'macOS'
         run: |
-          CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w -X 'main.version=$(git describe --always)'" -trimpath -o $cli backup_file_timestamps.go
+          CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w -X 'main.version=$(git describe --always)'" -trimpath
           zip -9q $cli-$os-amd64.zip $cli "restore file timestamps.bat"
-          CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w -X 'main.version=$(git describe --always)'" -trimpath -o $cli backup_file_timestamps.go
+          CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w -X 'main.version=$(git describe --always)'" -trimpath
           zip -9q $cli-$os-arm64.zip $cli "restore file timestamps.bat"
           rm $cli
           printf "sha256: %s\n" "$(shasum -a 256 $cli-$os-amd64.zip)"
@@ -67,7 +67,7 @@ jobs:
       - name: Build [linux]
         if: matrix.os == 'linux'
         run: |
-          CGO_ENABLED=0 GOOS=$os GOARCH=amd64 go build -ldflags="-s -w -X 'main.version=$(git describe --always)'" -trimpath -o $cli backup_file_timestamps.go
+          CGO_ENABLED=0 GOOS=$os GOARCH=amd64 go build -ldflags="-s -w -X 'main.version=$(git describe --always)'" -trimpath
           tar -I 'gzip -9' -cf $cli-$os-amd64.tar.gz $cli "restore file timestamps.bat"
           rm $cli
           printf "sha256: %s\n" "$(shasum -a 256 $cli-$os-amd64.tar.gz)"
