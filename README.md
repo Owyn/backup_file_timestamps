@@ -1,5 +1,7 @@
 Backs up (saves) modified dates (timestamps) for all files including those in subfolders in a directory with the ability to later restore them from the saved state, might be useful for cloud backup software and services which don't support restoring file timestamps when getting your files back
 
+Get executable files from the [**Releases**](https://github.com/Owyn/backup_file_timestamps/releases) section
+
 **Usage:**  
 `backup-file-timestamps.exe` - uses current directory (or the one dragged onto it) to go and save timestamps  
 `backup-file-timestamps.exe -save "C:\my folder"` - save modified time dates inside `C:\my folder` and its subfolders  
