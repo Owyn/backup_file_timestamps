@@ -56,7 +56,7 @@ jobs:
       - name: Build [windows]
         if: matrix.os == 'windows'
         run: |
-          GOOS=$os GOARCH=amd64 go build -ldflags="-s -w -X 'main.version=$(git describe --always)'" -trimpath -o $cli.exe backup_file_timestamps.go
+          GOOS=$os GOARCH=amd64 go build -ldflags="-s -w -X 'main.version=$(git describe --always)'" -trimpath
           zip -9q $cli-$os-amd64.zip $cli.exe "restore file timestamps.bat"
           rm $cli.exe
           printf "sha256: %s\n" "$(shasum -a 256 $cli-$os-amd64.zip)"
